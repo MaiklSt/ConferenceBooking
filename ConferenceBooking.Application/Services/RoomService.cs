@@ -16,6 +16,12 @@ public class RoomService : IRoomService
         _bookingRepository = bookingRepository;
     }
 
+    public async Task<IReadOnlyList<RoomResponse>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var rooms = await _roomRepository.GetAllAsync(cancellationToken);
+        return rooms.Select(MapToResponse).ToList();
+    }
+
     public async Task<RoomResponse> CreateAsync(CreateRoomRequest request, CancellationToken cancellationToken = default)
     {
         var services = request.Services

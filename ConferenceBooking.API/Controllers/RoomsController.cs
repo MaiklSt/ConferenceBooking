@@ -16,6 +16,36 @@ public class RoomsController : ControllerBase
     }
 
     /// <summary>
+    /// Отримати всі конференц-зали (потрібно, щоб взяти ID послуг для бронювання).
+    /// </summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(IReadOnlyList<RoomResponse>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<RoomResponse>>> GetAll(CancellationToken cancellationToken)
+    {
+        var rooms = await _roomService.GetAllAsync(cancellationToken);
+        return Ok(rooms);
+    }
+
+    /// <summary>
+    /// Знайти вільні зали за датою, часом і мінімальною місткістю.
+    /// </summary>
+    [HttpGet("available")]
+    [ProducesResponseType(typeof(IReadOnlyList<RoomResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IReadOnlyList<RoomResponse>>> SearchAvailable(
+        [FromQuery] DateTime startTime,
+        [FromQuery] DateTime endTime,
+        [FromQuery] int minCapacity,
+        CancellationToken cancellationToken)
+    {
+        var rooms = await _roomService.SearchAvailableAsync(
+            new SearchAvailableRoomsRequest(startTime, endTime, minCapacity),
+            cancellationToken);
+
+        return Ok(rooms);
+    }
+
+    /// <summary>
     /// Створити новий конференц-зал.
     /// </summary>
     [HttpPost]

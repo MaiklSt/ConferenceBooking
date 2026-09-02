@@ -1,4 +1,25 @@
 @ConferenceBooking.API_HostAddress = http://localhost:5102
+@roomId = 00000000-0000-0000-0000-000000000000
+@serviceId = 00000000-0000-0000-0000-000000000000
+
+### Отримати всі зали (скопіюй id залу і послуг)
+GET {{ConferenceBooking.API_HostAddress}}/api/rooms
+Accept: application/json
+
+### Знайти вільні зали
+GET {{ConferenceBooking.API_HostAddress}}/api/rooms/available?startTime=2024-09-01T10:00:00&endTime=2024-09-01T14:00:00&minCapacity=50
+Accept: application/json
+
+### Забронювати зал (підстав roomId і serviceId з GET /api/rooms)
+POST {{ConferenceBooking.API_HostAddress}}/api/bookings
+Content-Type: application/json
+
+{
+  "roomId": "{{roomId}}",
+  "startTime": "2024-09-01T10:00:00",
+  "duration": "04:00:00",
+  "selectedServiceIds": ["{{serviceId}}"]
+}
 
 ### Створити зал
 POST {{ConferenceBooking.API_HostAddress}}/api/rooms

@@ -5,6 +5,7 @@ namespace ConferenceBooking.Application.Interfaces;
 
 public interface IRoomService
 {
+    Task<IReadOnlyList<RoomResponse>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<RoomResponse> CreateAsync(CreateRoomRequest request, CancellationToken cancellationToken = default);
     Task<RoomResponse> UpdateAsync(Guid id, UpdateRoomRequest request, CancellationToken cancellationToken = default);
     Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
