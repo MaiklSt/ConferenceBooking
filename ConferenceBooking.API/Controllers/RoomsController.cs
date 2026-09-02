@@ -33,15 +33,10 @@ public class RoomsController : ControllerBase
     [ProducesResponseType(typeof(IReadOnlyList<RoomResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IReadOnlyList<RoomResponse>>> SearchAvailable(
-        [FromQuery] DateTime startTime,
-        [FromQuery] DateTime endTime,
-        [FromQuery] int minCapacity,
+        [FromQuery] SearchAvailableRoomsRequest request,
         CancellationToken cancellationToken)
     {
-        var rooms = await _roomService.SearchAvailableAsync(
-            new SearchAvailableRoomsRequest(startTime, endTime, minCapacity),
-            cancellationToken);
-
+        var rooms = await _roomService.SearchAvailableAsync(request, cancellationToken);
         return Ok(rooms);
     }
 
