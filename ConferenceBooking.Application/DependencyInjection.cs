@@ -14,6 +14,7 @@ public static class DependencyInjection
         services.AddSingleton<RentalCostCalculator>();
         services.AddScoped<IRoomService, RoomService>();
         services.AddScoped<IBookingService, BookingService>();
+        services.AddScoped<IReportService, ReportService>();
         services.AddValidatorsFromAssemblyContaining<CreateRoomRequestValidator>();
 
         return services;

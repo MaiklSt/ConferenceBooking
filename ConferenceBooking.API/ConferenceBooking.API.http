@@ -50,5 +50,18 @@ Content-Type: application/json
   ]
 }
 
-### Видалити зал (підстав свій ID)
-DELETE {{ConferenceBooking.API_HostAddress}}/api/rooms/00000000-0000-0000-0000-000000000000
+### Зведення звітів за день
+GET {{ConferenceBooking.API_HostAddress}}/api/reports/summary?from=2024-09-01T00:00:00&to=2024-09-02T00:00:00
+Accept: application/json
+
+### Завантаженість залів
+GET {{ConferenceBooking.API_HostAddress}}/api/reports/occupancy?from=2024-09-01T00:00:00&to=2024-09-02T00:00:00
+Accept: application/json
+
+### Виручка по залах
+GET {{ConferenceBooking.API_HostAddress}}/api/reports/revenue?from=2024-09-01T00:00:00&to=2024-09-02T00:00:00
+Accept: application/json
+
+### Популярні послуги
+GET {{ConferenceBooking.API_HostAddress}}/api/reports/services?from=2024-09-01T00:00:00&to=2024-09-02T00:00:00
+Accept: application/json
