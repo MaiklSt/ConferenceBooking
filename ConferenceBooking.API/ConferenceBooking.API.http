@@ -1,6 +1,33 @@
 @ConferenceBooking.API_HostAddress = http://localhost:5102
 
-GET {{ConferenceBooking.API_HostAddress}}/weatherforecast/
-Accept: application/json
+### Створити зал
+POST {{ConferenceBooking.API_HostAddress}}/api/rooms
+Content-Type: application/json
 
-###
+{
+  "name": "Зал D",
+  "capacity": 40,
+  "baseHourlyRate": 1800,
+  "services": [
+    { "name": "Проєктор", "price": 500 },
+    { "name": "Wi-Fi", "price": 300 }
+  ]
+}
+
+### Оновити зал (підстав свій ID)
+PUT {{ConferenceBooking.API_HostAddress}}/api/rooms/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "name": "Зал A",
+  "capacity": 55,
+  "baseHourlyRate": 2500,
+  "services": [
+    { "name": "Проєктор", "price": 500 },
+    { "name": "Wi-Fi", "price": 300 },
+    { "name": "Звук", "price": 700 }
+  ]
+}
+
+### Видалити зал (підстав свій ID)
+DELETE {{ConferenceBooking.API_HostAddress}}/api/rooms/00000000-0000-0000-0000-000000000000
